@@ -51,7 +51,7 @@ def add_game(form: GameSchema):
         session = Session()
         # adicionando produto
         session.add(game)
-        # efetivando o camando de adição de novo item na tabela
+        # efetivando o camando de adição de novo game na tabela
         session.commit()
         logger.debug(f"Adicionado game de nome: '{game.label}'")
         return detail_game(game), 200
@@ -64,7 +64,7 @@ def add_game(form: GameSchema):
 
     except Exception as e:
         # caso um erro fora do previsto
-        error_msg = "Não foi possível salvar novo item :/"
+        error_msg = "Não foi possível salvar novo game :/"
         logger.warning(f"Erro ao adicionar game '{game.label}', {error_msg}")
         return {"message": error_msg}, 400
 
@@ -81,11 +81,11 @@ def get_games():
     games = session.query(Game).all()
 
     if not games:
-        # se não há produtos cadastrados
+        # se não há games registrados
         return {"games": []}, 200
     else:
         logger.debug(f"%d games found" % len(games))
-        # retorna a representação de produto
+        # retorna a representação de um game registrado
         print(games)
         return list_games(games), 200
 
